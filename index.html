@@ -20,7 +20,7 @@ main{max-width:960px;margin:auto;padding:22px 20px 46px}
 .scorebox{background:#edf1f5;border-radius:999px;padding:9px 13px;font-weight:800;white-space:nowrap}
 .mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0}
 button{font:inherit}
-.mode,.reveal-one,.listen-actions button,.check-btn,.next-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;cursor:pointer}
+.mode,.listen-actions button,.check-btn,.next-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;cursor:pointer}
 .mode{text-align:left;min-height:75px;font-weight:800}
 .mode span{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:3px}
 .mode.primary{background:var(--c);color:#fff;border-color:var(--c)} .mode.primary span{color:rgba(255,255,255,.85)}
@@ -55,7 +55,6 @@ button{font:inherit}
 .listen-q{border-top:1px solid var(--line);padding:13px 0}
 .listen-q label{display:block;font-weight:700;margin-bottom:7px}
 .listen-q input{width:100%;padding:11px;border:1px solid #b9c5d0;border-radius:8px;font-size:16px}
-.reveal-one{margin-top:8px;font-size:14px}
 .model-answer{margin-top:8px;padding:10px 12px;border-left:4px solid var(--c);background:#eef6ff;border-radius:6px}
 .listen-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
 .student-note{font-size:13px;color:var(--muted);margin-top:11px}
@@ -101,31 +100,26 @@ footer{max-width:960px;margin:0 auto 30px;padding:0 20px;color:var(--muted);font
   <div class="listen-q">
     <label>1. Does the tempo become faster or slower?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Faster.</div>
   </div>
   <div class="listen-q">
     <label>2. Which Italian term from the booklet describes the change?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Accelerando.</div>
   </div>
   <div class="listen-q">
     <label>3. Is the change sudden or gradual?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Gradual.</div>
   </div>
   <div class="listen-q">
     <label>4. What effect does the tempo change have?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>It increases intensity, urgency and/or excitement. Accept a similar effect supported by the listening.</div>
   </div>
   <div class="listen-q">
     <label>5. If a performer deliberately pushes and pulls the speed for expression, which booklet term would describe this?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Rubato.</div>
   </div>
 </div>
@@ -135,32 +129,27 @@ footer{max-width:960px;margin:0 auto 30px;padding:0 20px;color:var(--muted);font
   <div class="listen-q">
     <label>1. Do you hear clearly contrasting sections?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Yes.</div>
   </div>
   <div class="listen-q">
     <label>2. Does one fixed A section keep returning between the contrasting sections?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>No.</div>
   </div>
   <div class="listen-q">
     <label>3. Which booklet term is useful for music that continues through new sections rather than repeating a fixed pattern?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Through-composed.</div>
   </div>
   <div class="listen-q">
     <label>4. What term means an extra closing section at the end?</label>
     <input type="text" autocomplete="off">
-    <button type="button" class="reveal-one">Reveal model answer</button>
     <div class="model-answer" hidden>Coda.</div>
   </div>
 </div>
 <div class="panel"><div class="listen-actions">
-<button type="button" id="revealAll">Reveal all model answers</button>
 <button type="button" id="clearListening">Clear listening answers</button>
-</div><p class="student-note">Type your answer before revealing the model answer. Equivalent well-supported wording may be accepted for questions about musical effect.</p></div>
+</div><p class="student-note">Type your answers to the listening questions. Equivalent well-supported wording may be accepted for questions about musical effect.</p></div>
 </main>
 <footer>Vocabulary is restricted to the relevant sections of the two class Elements booklets.</footer>
 
@@ -169,7 +158,7 @@ const NAME="Tempo & Structure/Form";
 const CFG={"terms": [["Largo", "very slow / slow and broad"], ["Adagio", "slow"], ["Andante", "walking pace"], ["Moderato", "moderate / medium speed"], ["Allegro", "fast"], ["Presto", "very fast"], ["Accelerando", "gradually getting faster / speeding up"], ["Ritardando / rallentando", "gradually getting slower"], ["Rubato", "flexible tempo for expression; 'stolen time'"], ["Binary form", "AB: two contrasting sections"], ["Ternary form", "ABA: a contrasting middle section followed by a return of A"], ["Rondo form", "a recurring A section with contrasting sections in between"], ["Minuet and Trio", "a larger form containing three separate binary forms; often a Classical third movement"], ["Theme and variations", "a theme followed by a series of altered versions"], ["Strophic form", "the same music is repeated for successive verses"], ["32-bar song / AABA", "AABA form; common in jazz and musical theatre; each section is 8 bars"], ["12-bar blues", "a chord progression used by blues, jazz and rock musicians"], ["Song form", "intro, verse, chorus, bridge / middle 8 and outro"], ["Intro", "the beginning of the song"], ["Verse", "tells the story of the song; the same melody is used each time"], ["Bridge", "a contrasting section linking sections together"], ["Chorus", "the catchy section that is repeated"], ["Middle 8", "a contrasting section, 8 bars long, often instrumental"], ["Outro", "the ending of the song"], ["Fill", "a short burst of notes, perhaps by the drummer, to signal a move to another section"], ["Coda", "an extra closing section at the end of the music"], ["Riff", "a short, catchy repeated motif in popular music or jazz"], ["Through-composed", "music continues with new sections rather than repeating a fixed pattern"]], "tempoCount": 9};
 const APPLICATIONS=[["The performer gradually speeds up through the phrase. Write the key word.", ["accelerando", "accel"], "Accelerando"], ["The performer gradually slows down through the phrase. Write either accepted Italian term.", ["ritardando", "rallentando", "rit", "rall"], "Ritardando / rallentando"], ["The performer flexibly pushes and pulls the beat for expression. Write the key word.", ["rubato"], "Rubato"], ["The score asks for a walking pace. Write the Italian term.", ["andante"], "Andante"], ["A piece follows A–A–B–A and each section is eight bars. Write the key term.", ["32 bar song", "32-bar song", "aaba"], "32-bar song / AABA"], ["Every verse uses the same music but the words change. Write the key word.", ["strophic", "strophic form"], "Strophic form"], ["A drummer plays a short burst of notes to signal the move into the next section. Write the key word.", ["fill"], "Fill"], ["A short catchy repeated idea drives a rock song. Write the key word.", ["riff"], "Riff"], ["The music keeps moving through new sections rather than repeating a fixed pattern. Write the key word.", ["through composed", "through-composed"], "Through-composed"]];
 const SYMBOLS=[["<span class='bigmark'>accel.</span>", ["accelerando", "accel"], "Accelerando"], ["<span class='bigmark'>rit.</span>", ["ritardando", "rit"], "Ritardando"], ["<span class='bigmark'>rall.</span>", ["rallentando", "rall"], "Rallentando"], ["<span class='formmark'>A B</span>", ["binary", "binary form"], "Binary form"], ["<span class='formmark'>A B A</span>", ["ternary", "ternary form"], "Ternary form"], ["<span class='formmark'>A A B A</span>", ["32 bar song", "32-bar song", "aaba"], "32-bar song / AABA"], ["<span class='formmark'>A B A C A</span>", ["rondo", "rondo form"], "Rondo form"]];
-const ALIASES={"Ritardando / rallentando": ["ritardando", "rallentando", "rit", "rall"], "32-bar song / AABA": ["32 bar song", "32-bar song", "32 bar song form", "32-bar song form", "32 bar form", "32bar song", "32bar song form", "aaba", "thirty two bar song", "thirty two bar song form"], "Song form": ["song form", "popular song form", "pop song form", "popular music form"], "Binary form": ["binary", "binary form"], "Ternary form": ["ternary", "ternary form"], "Rondo form": ["rondo", "rondo form"], "Strophic form": ["strophic", "strophic form"], "Theme and variations": ["theme and variations", "theme and variation", "theme & variations"]};
+const ALIASES={"Ritardando / rallentando": ["ritardando", "rallentando", "rit", "rall"], "32-bar song / AABA": ["32 bar song", "32-bar song", "32 bar song form", "32-bar song form", "32 bar form", "32bar song", "32bar song form", "aaba", "thirty two bar song", "thirty two bar song form"], "Song form": ["song form", "popular song form", "pop song form", "popular music form"], "Binary form": ["binary", "binary form"], "Ternary form": ["ternary", "ternary form"], "Rondo form": ["rondo", "rondo form"], "Strophic form": ["strophic", "strophic form"], "Theme and variations": ["theme and variations", "theme and variation", "theme & variations"], "Bridge": ["bridge", "middle 8", "middle eight"]};
 
 function clean(s){
  return String(s||'').toLowerCase().trim()
@@ -317,13 +306,6 @@ document.getElementById('reverse').addEventListener('click',()=>start('reverse')
 document.getElementById('symbols').addEventListener('click',()=>start('symbols'));
 retry.addEventListener('click',()=>{if(wrong.length)start('retry',wrong)});
 
-document.querySelectorAll('.reveal-one').forEach(b=>b.addEventListener('click',()=>{
- const a=b.nextElementSibling;a.hidden=!a.hidden;b.textContent=a.hidden?'Reveal model answer':'Hide model answer';
-}));
-document.getElementById('revealAll').addEventListener('click',()=>{
- document.querySelectorAll('.model-answer').forEach(a=>a.hidden=false);
- document.querySelectorAll('.reveal-one').forEach(b=>b.textContent='Hide model answer');
-});
 document.getElementById('clearListening').addEventListener('click',()=>{
  document.querySelectorAll('.listen-q input').forEach(i=>i.value='');
  document.querySelectorAll('.model-answer').forEach(a=>a.hidden=true);
