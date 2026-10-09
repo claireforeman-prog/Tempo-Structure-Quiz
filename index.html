@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GCSE Music – Tempo and Structure/Form Quiz</title>
+<style>
+:root{--ink:#132437;--muted:#5c6c7e;--line:#d6dde6;--paper:#f5f7fa;--card:#fff;--c:#3949db}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);line-height:1.45}
+header{background:#12263a;color:white;padding:26px 20px}
+.wrap{max-width:960px;margin:auto}
+header h1{margin:0;font-size:clamp(26px,4vw,42px)}
+header p{margin:6px 0 0;color:#dce6ef}
+main{max-width:960px;margin:auto;padding:22px 20px 46px}
+.notice{background:#fff7dc;border:1px solid #e2cf86;border-radius:11px;padding:12px 14px;margin-bottom:16px}
+.panel{background:white;border:1px solid var(--line);border-top:7px solid var(--c);border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 2px 10px rgba(12,28,45,.05)}
+.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.panel h2,.panel h3{margin:0 0 6px}
+.scorebox{background:#edf1f5;border-radius:999px;padding:9px 13px;font-weight:800;white-space:nowrap}
+.mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0}
+button{font:inherit}
+.mode,.listen-actions button,.check-btn,.next-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;cursor:pointer}
+.mode{text-align:left;min-height:75px;font-weight:800}
+.mode span{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:3px}
+.mode.primary{background:var(--c);color:#fff;border-color:var(--c)} .mode.primary span{color:rgba(255,255,255,.85)}
+.mode:disabled{opacity:.45;cursor:not-allowed}
+.quiz-area{border-top:1px solid var(--line);padding-top:16px}
+.intro-card{background:#f6f8fa;border-radius:10px;padding:14px}
+.intro-card ul{margin:7px 0 0;padding-left:22px}
+.progress{font-size:13px;color:var(--muted);font-weight:800}
+.kind{display:inline-block;background:#eef2f6;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800;margin:7px 0}
+.qtext{font-size:20px;font-weight:800;margin:7px 0 15px}
+.symbol-stage{min-height:130px;display:flex;align-items:center;justify-content:center;background:#fbfcfd;border:1px solid var(--line);border-radius:12px;margin:8px 0 16px;padding:16px}
+.answer-input{width:100%;padding:12px;border:1px solid #b9c5d0;border-radius:9px;font-size:17px}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.check-btn,.next-btn{background:var(--c);color:#fff;border-color:var(--c);font-weight:800}
+.feedback{margin-top:12px;padding:11px 13px;border-radius:9px;font-weight:700}
+.good{background:#edf8ef;color:#205e29} .bad{background:#fff0f0;color:#8c1f1f}
+.mcq{display:grid;gap:8px}
+.mcq button{text-align:left;padding:11px 13px;background:#fff;border:1px solid var(--line);border-radius:9px;cursor:pointer}
+.mcq button.correct{background:#edf8ef;border-color:#2e7d32} .mcq button.wrong{background:#fff0f0;border-color:#c62828} .mcq button.selected{background:#e8eef5;border-color:var(--c);font-weight:800}
+.bigmark,.formmark,.roman{font-size:42px;font-weight:700;letter-spacing:.05em}
+.formmark{font-size:36px;word-spacing:12px} .roman{font-family:Georgia,serif;font-size:44px}
+.sym-svg{width:210px;height:75px;stroke:currentColor;stroke-width:4;fill:none}
+.note-svg{width:95px;height:125px}
+.timesig{display:inline-flex;flex-direction:column;font-family:Georgia,serif;font-size:44px;line-height:.68;font-weight:800}
+.triplet-vis{position:relative;font-size:38px;word-spacing:9px;padding-top:18px} .triplet-vis b{position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:18px}
+.sym-caption{font-size:14px;color:var(--muted);text-align:center;margin-top:5px}
+.artic-vis{position:relative;display:inline-flex;flex-direction:column;align-items:center;font-size:46px;line-height:.65} .artic-vis .dot{font-size:35px} .artic-vis .accent,.artic-vis .tenuto{font-size:38px}
+.texture-vis{display:flex;flex-direction:column;gap:5px;font-size:25px;min-width:280px} .texture-vis .indent1{padding-left:35px} .texture-vis .indent2{padding-left:70px}
+.result h4{font-size:25px;margin:0 0 5px}
+.breakdown{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0} .breakdown span{background:#eef2f6;border-radius:999px;padding:7px 10px;font-size:13px;font-weight:700}
+.cue{background:#f5f7f9;border-radius:8px;padding:10px 12px;color:#415163}
+.listen-q{border-top:1px solid var(--line);padding:13px 0}
+.listen-q label{display:block;font-weight:700;margin-bottom:7px}
+.listen-q input{width:100%;padding:11px;border:1px solid #b9c5d0;border-radius:8px;font-size:16px}
+.model-answer{margin-top:8px;padding:10px 12px;border-left:4px solid var(--c);background:#eef6ff;border-radius:6px}
+.listen-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.student-note{font-size:13px;color:var(--muted);margin-top:11px}
+footer{max-width:960px;margin:0 auto 30px;padding:0 20px;color:var(--muted);font-size:13px}
+@media(max-width:760px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{display:block}.scorebox{display:inline-block;margin-top:8px}}
+@media(max-width:480px){.mode-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Tempo &amp; Structure/Form</h1>
+<p>GCSE Music • DR T SMITH • self-marking challenge quiz</p>
+</div></header>
+<main>
+<div class="notice"><strong>Student version:</strong> Combined Tempo and Structure/Form quiz. The 20-question challenge covers seven tempo ideas and thirteen structure/form ideas.</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <div><h2>Vocabulary challenge</h2><p>Reverse recall, application and symbols/notation where relevant.</p></div>
+    <div class="scorebox"><span id="score">0</span>/<span id="attempted">0</span></div>
+  </div>
+  <div class="mode-grid">
+    <button type="button" id="challenge" class="mode primary">20-question challenge<span>7 tempo + 13 structure questions</span></button>
+    <button type="button" id="reverse" class="mode">Full reverse recall<span>definition → write the term</span></button>
+    <button type="button" id="symbols" class="mode">Symbols & notation<span>identify the symbol/notation</span></button>
+    <button type="button" id="retry" class="mode" disabled>Retry mistakes<span>only missed questions</span></button>
+  </div>
+  <div id="quizArea" class="quiz-area">
+    <div class="intro-card">
+      <strong>Marking is deliberately accommodating.</strong>
+      <ul>
+        <li>If the correct musical term appears anywhere in your answer, it can be accepted.</li>
+        <li>Hyphens, punctuation and capitalisation do not matter.</li>
+        <li>Small spelling mistakes are allowed.</li><li>Your answers are marked only when you finish the quiz.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Edvard Grieg – In the Hall of the Mountain King — listening challenge</h3>
+  <p class="cue"><strong>Teacher cue:</strong> Play from the opening into the build so students can hear the speed change.</p>
+  <div class="listen-q">
+    <label>1. Does the tempo become faster or slower?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Faster.</div>
+  </div>
+  <div class="listen-q">
+    <label>2. Which Italian term from the booklet describes the change?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Accelerando.</div>
+  </div>
+  <div class="listen-q">
+    <label>3. Is the change sudden or gradual?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Gradual.</div>
+  </div>
+  <div class="listen-q">
+    <label>4. What effect does the tempo change have?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>It increases intensity, urgency and/or excitement. Accept a similar effect supported by the listening.</div>
+  </div>
+  <div class="listen-q">
+    <label>5. If a performer deliberately pushes and pulls the speed for expression, which booklet term would describe this?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Rubato.</div>
+  </div>
+</div>
+<div class="panel">
+  <h3>Queen – Bohemian Rhapsody — listening challenge</h3>
+  <p class="cue"><strong>Teacher cue:</strong> Sample the ballad section, operatic section, hard-rock section and ending rather than playing the whole track.</p>
+  <div class="listen-q">
+    <label>1. Do you hear clearly contrasting sections?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Yes.</div>
+  </div>
+  <div class="listen-q">
+    <label>2. Does one fixed A section keep returning between the contrasting sections?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>No.</div>
+  </div>
+  <div class="listen-q">
+    <label>3. Which booklet term is useful for music that continues through new sections rather than repeating a fixed pattern?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Through-composed.</div>
+  </div>
+  <div class="listen-q">
+    <label>4. What term means an extra closing section at the end?</label>
+    <input type="text" autocomplete="off">
+    <div class="model-answer" hidden>Coda.</div>
+  </div>
+</div>
+<div class="panel"><div class="listen-actions">
+<button type="button" id="clearListening">Clear listening answers</button>
+</div><p class="student-note">Type your answers to the listening questions. Equivalent well-supported wording may be accepted for questions about musical effect.</p></div>
+</main>
+<footer>Vocabulary is restricted to the relevant sections of the two class Elements booklets.</footer>
+
+<script>
+const NAME="Tempo & Structure/Form";
+const CFG={"terms": [["Largo", "very slow / slow and broad"], ["Adagio", "slow"], ["Andante", "walking pace"], ["Moderato", "moderate / medium speed"], ["Allegro", "fast"], ["Presto", "very fast"], ["Accelerando", "gradually getting faster / speeding up"], ["Ritardando / rallentando", "gradually getting slower"], ["Rubato", "flexible tempo for expression; 'stolen time'"], ["Binary form", "AB: two contrasting sections"], ["Ternary form", "ABA: a contrasting middle section followed by a return of A"], ["Rondo form", "a recurring A section with contrasting sections in between"], ["Theme and variations", "a theme followed by a series of altered versions"], ["Strophic form", "the same music is repeated for successive verses"], ["32-bar song / AABA", "AABA form; common in jazz and musical theatre; each section is 8 bars"], ["12-bar blues", "a chord progression used by blues, jazz and rock musicians"], ["Song form", "intro, verse, chorus, bridge / middle 8 and outro"], ["Intro", "the beginning of the song"], ["Verse", "tells the story of the song; the same melody is used each time"], ["Bridge", "a contrasting section linking sections together"], ["Chorus", "the catchy section that is repeated"], ["Middle 8", "a contrasting section, 8 bars long, often instrumental"], ["Outro", "the ending of the song"], ["Fill", "a short burst of notes, perhaps by the drummer, to signal a move to another section"], ["Coda", "an extra closing section at the end of the music"], ["Riff", "a short, catchy repeated motif in popular music or jazz"], ["Through-composed", "music continues with new sections rather than repeating a fixed pattern"]], "tempoCount": 9};
+const APPLICATIONS=[["The performer gradually speeds up through the phrase. Write the key word.", ["accelerando", "accel"], "Accelerando"], ["The performer gradually slows down through the phrase. Write either accepted Italian term.", ["ritardando", "rallentando", "rit", "rall"], "Ritardando / rallentando"], ["The performer flexibly pushes and pulls the beat for expression. Write the key word.", ["rubato"], "Rubato"], ["The score asks for a walking pace. Write the Italian term.", ["andante"], "Andante"], ["A piece follows A–A–B–A and each section is eight bars. Write the key term.", ["32 bar song", "32-bar song", "aaba"], "32-bar song / AABA"], ["Every verse uses the same music but the words change. Write the key word.", ["strophic", "strophic form"], "Strophic form"], ["A drummer plays a short burst of notes to signal the move into the next section. Write the key word.", ["fill"], "Fill"], ["A short catchy repeated idea drives a rock song. Write the key word.", ["riff"], "Riff"], ["The music keeps moving through new sections rather than repeating a fixed pattern. Write the key word.", ["through composed", "through-composed"], "Through-composed"]];
+const SYMBOLS=[["<span class='bigmark'>accel.</span>", ["accelerando", "accel"], "Accelerando"], ["<span class='bigmark'>rit.</span>", ["ritardando", "rit"], "Ritardando"], ["<span class='bigmark'>rall.</span>", ["rallentando", "rall"], "Rallentando"], ["<span class='formmark'>A B</span>", ["binary", "binary form"], "Binary form"], ["<span class='formmark'>A B A</span>", ["ternary", "ternary form"], "Ternary form"], ["<span class='formmark'>A A B A</span>", ["32 bar song", "32-bar song", "aaba"], "32-bar song / AABA"], ["<span class='formmark'>A B A C A</span>", ["rondo", "rondo form"], "Rondo form"]];
+const ALIASES={"Ritardando / rallentando": ["ritardando", "rallentando", "rit", "rall"], "32-bar song / AABA": ["32 bar song", "32-bar song", "32 bar song form", "32-bar song form", "32 bar form", "32bar song", "32bar song form", "aaba", "thirty two bar song", "thirty two bar song form"], "Song form": ["song form", "popular song form", "pop song form", "popular music form"], "Binary form": ["binary", "binary form"], "Ternary form": ["ternary", "ternary form"], "Rondo form": ["rondo", "rondo form"], "Strophic form": ["strophic", "strophic form"], "Theme and variations": ["theme and variations", "theme and variation", "theme & variations"], "Bridge": ["bridge", "middle 8", "middle eight"]};
+
+function clean(s){
+ return String(s||'').toLowerCase().trim()
+   .replace(/♯/g,' sharp ').replace(/♭/g,' flat ')
+   .replace(/&/g,' and ')
+   .replace(/[–—-]/g,' ')
+   .replace(/[().,/;:'"]/g,' ')
+   .replace(/\bpopular\b/g,' ')
+   .replace(/\bpop\b/g,' ')
+   .replace(/\bmusic\b/g,' ')
+   .replace(/\s+/g,' ').trim();
+}
+function relaxed(s){
+ let x=clean(s);
+ x=x.replace(/\b(form|term|marking|mark|symbol|pattern)\b/g,' ');
+ return x.replace(/\s+/g,' ').trim();
+}
+function levenshtein(a,b){
+ a=relaxed(a); b=relaxed(b);
+ const m=a.length,n=b.length;if(!m)return n;if(!n)return m;
+ const dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
+ for(let i=0;i<=m;i++)dp[i][0]=i;
+ for(let j=0;j<=n;j++)dp[0][j]=j;
+ for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){
+   const cost=a[i-1]===b[j-1]?0:1;
+   dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+cost);
+ }
+ return dp[m][n];
+}
+function aliasesFor(term){
+ const a=ALIASES[term]||[], base=[term,...a];
+ base.push(term.replace(/\([^)]*\)/g,'').trim());
+ term.split('/').forEach(x=>base.push(x.trim()));
+ return [...new Set(base.map(clean).filter(Boolean))];
+}
+function isAccepted(given, accepted){
+ const g=relaxed(given); if(!g)return false;
+ for(const raw of accepted){
+   const a=relaxed(raw); if(!a)continue;
+   if(g===a)return true;
+   if(a.length>=4 || a.includes(' ')){
+     if((' '+g+' ').includes(' '+a+' '))return true;
+   }
+   if(g.length>=4 && a.length>=4){
+     const gw=g.split(' '), aw=a.split(' ');
+     if(aw.every(w=>w.length<4||gw.includes(w)))return true;
+   }
+   const maxLen=Math.max(g.length,a.length);
+   const tol=maxLen>=9?2:(maxLen>=5?1:0);
+   if(tol>0 && levenshtein(g,a)<=tol)return true;
+ }
+ return false;
+}
+function shuffle(a){
+ const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x;
+}
+
+const area=document.getElementById('quizArea'),scoreEl=document.getElementById('score'),attEl=document.getElementById('attempted'),retry=document.getElementById('retry');
+let qs=[],pos=0,score=0,wrong=[],breakdown={Recall:[0,0],Application:[0,0],Symbols:[0,0]},responses=[];
+
+function reverseQuestion(item){
+ return {kind:'Recall',type:'typed',prompt:`Write the key word or term for this definition: “${item[1]}”`,accepted:aliasesFor(item[0]),model:item[0]};
+}
+function directMCQ(item){
+ const others=shuffle(CFG.terms.filter(x=>x[0]!==item[0])).slice(0,3);
+ return {kind:'Recall',type:'mcq',prompt:`Which definition best matches “${item[0]}”?`,model:item[1],choices:shuffle([item[1],...others.map(x=>x[1])])};
+}
+function applicationQuestion(a){return {kind:'Application',type:'typed',prompt:a[0],accepted:a[1].map(clean),model:a[2]}}
+function symbolQuestion(s){return {kind:'Symbols',type:'symbol',visual:s[0],prompt:'Identify the correct musical term.',accepted:s[1].map(clean),model:s[2]}}
+
+function concept(model){
+ const x=clean(model);
+ return (x==='ritardando'||x==='rallentando'||x==='ritardando rallentando')?'ritardando rallentando':x;
+}
+function uniqueQuestions(items){
+ const seen=new Set();
+ return items.filter(q=>{const key=concept(q.model);if(seen.has(key))return false;seen.add(key);return true});
+}
+function questionFor(item){
+ const key=concept(item[0]);
+ const variants=[reverseQuestion(item),
+  ...APPLICATIONS.filter(a=>concept(a[2])===key).map(applicationQuestion),
+  ...SYMBOLS.filter(s=>concept(s[2])===key).map(symbolQuestion)];
+ return shuffle(variants)[0];
+}
+function buildChallenge(){
+ const chosen=["Ritardando / rallentando","Accelerando","Rubato","Moderato","Andante","Presto"];
+ const tempo=chosen.map(term=>questionFor(CFG.terms.find(item=>item[0]===term)));
+ const slow={kind:'Recall',type:'mcq',prompt:'Which group of Italian terms indicates a slow tempo?',
+  model:'Lento, Adagio and Largo',choices:shuffle([
+   'Lento, Adagio and Largo','Andante, Moderato and Allegro',
+   'Allegro, Presto and Accelerando','Rubato, Presto and Moderato'])};
+ const structure=shuffle(CFG.terms.slice(CFG.tempoCount)).slice(0,13).map(questionFor);
+ return shuffle([...tempo,slow,...structure]);
+}
+function start(mode,sourceWrong=null){
+  qs=sourceWrong?shuffle(sourceWrong):(mode==='reverse'?shuffle(CFG.terms).map(reverseQuestion):mode==='symbols'?uniqueQuestions(shuffle(SYMBOLS).map(symbolQuestion)):buildChallenge());
+  pos=0;score=0;wrong=[];responses=Array(qs.length).fill(null);breakdown={Recall:[0,0],Application:[0,0],Symbols:[0,0]};
+  retry.disabled=true;scoreEl.textContent='0';attEl.textContent='0';render();
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function markAll(){
+  score=0;wrong=[];breakdown={Recall:[0,0],Application:[0,0],Symbols:[0,0]};
+  qs.forEach((q,i)=>{
+    const answer=responses[i]??'';
+    const ok=q.type==='mcq' ? answer===q.model : isAccepted(answer,q.accepted);
+    breakdown[q.kind][1]++;
+    if(ok){breakdown[q.kind][0]++;score++}
+    else wrong.push({...q,studentAnswer:answer});
+  });
+  scoreEl.textContent=score;
+  attEl.textContent=qs.length;
+  retry.disabled=wrong.length===0;
+}
+
+function showResults(){
+  markAll();
+  const bits=Object.entries(breakdown).filter(x=>x[1][1]).map(([k,v])=>`<span>${k}: ${v[0]}/${v[1]}</span>`).join('');
+  const review=wrong.length
+    ? `<div style="margin-top:18px"><h3>Incorrect question summary</h3>${wrong.map(q=>`
+        <div style="border:1px solid #eccaca;border-left:5px solid var(--c);background:#fffafa;border-radius:9px;padding:11px 13px;margin:9px 0">
+          <div style="font-weight:800;margin-bottom:5px">${escapeHtml(q.prompt)}</div>
+          <div><strong>Your answer:</strong> ${escapeHtml(q.studentAnswer||'No answer')}</div>
+          <div><strong>Correct answer:</strong> ${escapeHtml(q.model)}</div>
+        </div>`).join('')}</div>`
+    : `<div style="margin-top:16px;background:#edf8ef;border:1px solid #bcdabd;border-radius:9px;padding:12px"><strong>Full marks.</strong> No incorrect questions to review.</div>`;
+
+  area.innerHTML=`<div class="result"><h4>${score} / ${qs.length}</h4><p>${score===qs.length?'Excellent — full marks.':score>=Math.ceil(qs.length*.8)?'Strong recall. Review the missed items below.':'Review the incorrect items below, then try again.'}</p><div class="breakdown">${bits}</div>${review}</div>`;
+}
+
+function render(){
+  if(pos>=qs.length){showResults();return}
+
+  const q=qs[pos], symbol=q.visual?`<div class="symbol-stage">${q.visual}</div>`:'';
+  area.innerHTML=`<div class="progress">Question ${pos+1} of ${qs.length}</div><div class="kind">${q.kind}</div>${symbol}<div class="qtext">${q.prompt}</div><div class="answer-zone"></div><div class="feedback" hidden></div><div class="action-row"></div>`;
+
+  const zone=area.querySelector('.answer-zone'),fb=area.querySelector('.feedback'),actions=area.querySelector('.action-row');
+
+  function goNext(){
+    if(q.type==='mcq'){
+      if(!responses[pos]){
+        fb.className='feedback bad';fb.textContent='Choose an answer first.';fb.hidden=false;return;
+      }
+    }else{
+      const input=zone.querySelector('input');
+      if(!input || !clean(input.value)){
+        fb.className='feedback bad';fb.textContent='Type an answer first.';fb.hidden=false;return;
+      }
+      responses[pos]=input.value;
+    }
+    pos++;
+    render();
+  }
+
+  if(q.type==='mcq'){
+    const grid=document.createElement('div');grid.className='mcq';
+    q.choices.forEach(choice=>{
+      const b=document.createElement('button');b.type='button';b.textContent=choice;
+      if(responses[pos]===choice)b.classList.add('selected');
+      b.addEventListener('click',()=>{
+        responses[pos]=choice;
+        [...grid.children].forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        fb.hidden=true;
+      });
+      grid.appendChild(b);
+    });
+    zone.appendChild(grid);
+  }else{
+    const input=document.createElement('input');input.className='answer-input';input.type='text';input.placeholder='Type the musical term…';
+    input.value=responses[pos]||'';
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')goNext()});
+    zone.appendChild(input);
+    setTimeout(()=>input.focus(),0);
+  }
+
+  const n=document.createElement('button');
+  n.type='button';n.className='next-btn';
+  n.textContent=pos===qs.length-1?'Finish quiz':'Next question';
+  n.addEventListener('click',goNext);
+  actions.appendChild(n);
+}
+
+document.getElementById('challenge').addEventListener('click',()=>start('challenge'));
+document.getElementById('reverse').addEventListener('click',()=>start('reverse'));
+document.getElementById('symbols').addEventListener('click',()=>start('symbols'));
+retry.addEventListener('click',()=>{if(wrong.length)start('retry',wrong.map(q=>{const c={...q};delete c.studentAnswer;return c;}))});
+
+document.getElementById('clearListening').addEventListener('click',()=>{
+ document.querySelectorAll('.listen-q input').forEach(i=>i.value='');
+ document.querySelectorAll('.model-answer').forEach(a=>a.hidden=true);
+ document.querySelectorAll('.reveal-one').forEach(b=>b.textContent='Reveal model answer');
+});
+</script>
+</body>
+</html>
